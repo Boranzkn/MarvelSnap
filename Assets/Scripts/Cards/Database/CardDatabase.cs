@@ -6,7 +6,9 @@ public class CardDatabase : MonoBehaviour
 {
     public static CardDatabase Instance { get; private set; }
 
-    [SerializeField] private List<CardSO> allCardsSOList;
+    private const string CARD_SO_PATH = "Card SO";
+
+    public List<CardSO> AllCardsSOList { get; private set; }
 
     private Dictionary<string, CardSO> cardDictionary;
 
@@ -22,8 +24,10 @@ public class CardDatabase : MonoBehaviour
             Destroy(gameObject);
         }
 
+        SetAllCards();
+
         if (cardDictionary == null)
-            cardDictionary = allCardsSOList.ToDictionary(c => c.ID, c => c);
+            cardDictionary = AllCardsSOList.ToDictionary(c => c.ID, c => c);
     }
 
     public CardSO GetCardSOByID(string id)
@@ -36,10 +40,8 @@ public class CardDatabase : MonoBehaviour
         return null;
     }
 
-
-    // --------------GETTER METHODS--------------
-    public List<CardSO> GetAllCards()
+    private void SetAllCards()
     {
-        return allCardsSOList;
+        AllCardsSOList = Resources.LoadAll<CardSO>($"{CARD_SO_PATH}").ToList();
     }
 }

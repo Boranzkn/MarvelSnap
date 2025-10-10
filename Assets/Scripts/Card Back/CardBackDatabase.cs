@@ -19,10 +19,10 @@ public class CardBackDatabase : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        LoadCardBacks();
+        SetCardBacks();
     }
 
-    private void LoadCardBacks()
+    private void SetCardBacks()
     {
         CardBacks = Resources.LoadAll<Sprite>(CARD_BACKS_PATH);
         if (CardBacks == null || CardBacks.Length == 0)

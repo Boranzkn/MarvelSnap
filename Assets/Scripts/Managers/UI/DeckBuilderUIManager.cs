@@ -77,7 +77,7 @@ public class DeckBuilderUIManager : MonoBehaviour
 
     public void LoadAllCards()
     {
-        foreach (var cardSO in CardDatabase.Instance.GetAllCards())
+        foreach (var cardSO in CardDatabase.Instance.AllCardsSOList)
         {
             Image createdCard = Instantiate(cardImagePrefab, allCardsContent);
 
@@ -87,7 +87,7 @@ public class DeckBuilderUIManager : MonoBehaviour
 
     public void LoadAllDecks()
     {
-        foreach (var deckSaveData in DeckDatabase.Instance.GetAllDeckSaveDatas())
+        foreach (var deckSaveData in DeckDatabase.Instance.DeckSaveDatas)
         {
             CreateDeckImage(deckSaveData);
         }

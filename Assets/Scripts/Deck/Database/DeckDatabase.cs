@@ -10,6 +10,10 @@ public class DeckDatabase : MonoBehaviour
     private const string DECK_KEY_PREFIX = "PLAYER_DECKS";
     private const string DECK_KEYS = "DECK_KEYS";
 
+    public List<DeckSaveData> DeckSaveDatas { get; private set; }
+
+    private DeckKeysSerializable deckKeysSerializable;
+
     private void Awake()
     {
         if (Instance == null)
@@ -21,6 +25,9 @@ public class DeckDatabase : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        SetAllDeckKeys();
+        SetAllDeckSaveDatas();
     }
 
     // FROM DECK SAVE DATA TO DECK OBJECT
@@ -54,7 +61,7 @@ public class DeckDatabase : MonoBehaviour
         return save;
     }
 
-    public void SaveDeck(Deck deck)
+    private void SaveDeck(Deck deck)
     {
         DeckSaveData saveData = FromDeckToSaveData(deck);
         string key = $"{DECK_KEY_PREFIX}_{saveData.deckName}";
@@ -64,7 +71,7 @@ public class DeckDatabase : MonoBehaviour
         SaveKey(key);
     }
 
-    public void SaveDeck(DeckSaveData deck)
+    private void SaveDeck(DeckSaveData deck)
     {
         string key = $"{DECK_KEY_PREFIX}_{deck.deckName}";
         PlayerPrefs.SetString(key, JsonUtility.ToJson(deck));
@@ -75,19 +82,16 @@ public class DeckDatabase : MonoBehaviour
 
     private void SaveKey(string key)
     {
-        DeckKeysSerializable deckKeysSerializable = GetAllDeckKeys();
-
         if (!deckKeysSerializable.keys.Contains(key))
         {
             deckKeysSerializable.keys.Add(key);
+            string json = JsonUtility.ToJson(deckKeysSerializable);
+            PlayerPrefs.SetString(DECK_KEYS, json);
+            PlayerPrefs.Save();
         }
-
-        string json = JsonUtility.ToJson(deckKeysSerializable);
-        PlayerPrefs.SetString(DECK_KEYS, json);
-        PlayerPrefs.Save();
     }
 
-    public DeckSaveData GetDeckSaveDataByDeckName(string deckName)
+    private DeckSaveData GetDeckSaveDataByDeckName(string deckName)
     {
         string key = $"{DECK_KEY_PREFIX}_{deckName}";
         if (!PlayerPrefs.HasKey(key)) return null;
@@ -96,28 +100,29 @@ public class DeckDatabase : MonoBehaviour
         return JsonUtility.FromJson<DeckSaveData>(json);
     }
 
-    public List<DeckSaveData> GetAllDeckSaveDatas()
+    private void SetAllDeckSaveDatas()
     {
-        List<DeckSaveData> deckSaveDatas = new List<DeckSaveData>();
+        DeckSaveDatas = new List<DeckSaveData>();
 
-        if (GetAllDeckKeys().keys.Count == 0) return deckSaveDatas;
+        if (deckKeysSerializable.keys.Count == 0) return;
 
-        foreach (string key in GetAllDeckKeys().keys)
+        foreach (string key in deckKeysSerializable.keys)
         {
             if (key.StartsWith(DECK_KEY_PREFIX))
             {
                 string json = PlayerPrefs.GetString(key);
-                deckSaveDatas.Add(JsonUtility.FromJson<DeckSaveData>(json));
+                DeckSaveDatas.Add(JsonUtility.FromJson<DeckSaveData>(json));
             }
         }
-        return deckSaveDatas;
     }
 
-    private DeckKeysSerializable GetAllDeckKeys()
+    private void SetAllDeckKeys()
     {
-        if (!PlayerPrefs.HasKey(DECK_KEYS)) return new DeckKeysSerializable();
+        deckKeysSerializable = new DeckKeysSerializable();
+
+        if (!PlayerPrefs.HasKey(DECK_KEYS)) return;
 
         string json = PlayerPrefs.GetString(DECK_KEYS);
-        return JsonUtility.FromJson<DeckKeysSerializable>(json);
+        deckKeysSerializable = JsonUtility.FromJson<DeckKeysSerializable>(json);
     }
 }

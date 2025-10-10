@@ -20,10 +20,10 @@ public class AvatarDatabase : MonoBehaviour
             Destroy(gameObject);
         }
 
-        LoadAvatars();
+        SetAvatars();
     }
 
-    private void LoadAvatars()
+    private void SetAvatars()
     {
         Avatars = Resources.LoadAll<Sprite>(AVATARS_PATH);
         if (Avatars == null || Avatars.Length == 0)
