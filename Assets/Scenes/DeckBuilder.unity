@@ -709,27 +709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1a2350a22998d4a8deaf5cc2e15256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allCardsSOList:
-  - {fileID: 11400000, guid: 8c087a551cd256345932c478f837ebea, type: 2}
-  - {fileID: 11400000, guid: 5bdd2e9ef2afc3046bc3e5e76df2687e, type: 2}
-  - {fileID: 11400000, guid: e6115569c5f497b4095ba96b7c400f32, type: 2}
-  - {fileID: 11400000, guid: b4762efd6253c7f44af0224095da777e, type: 2}
-  - {fileID: 11400000, guid: d56a740fdd1aafa42a23dff51e966555, type: 2}
-  - {fileID: 11400000, guid: ee5c7ba968a648543a51f2f2ec0ec084, type: 2}
-  - {fileID: 11400000, guid: 3a9bc57c41b3df941b2079fc43b32d04, type: 2}
-  - {fileID: 11400000, guid: fedcae6f09619e84c9938bf6daae25e5, type: 2}
-  - {fileID: 11400000, guid: 49c4e91eccb5bff45961ccf831733959, type: 2}
-  - {fileID: 11400000, guid: 1ae7c4cfe6c04fc4ca3cdd418a9e510d, type: 2}
-  - {fileID: 11400000, guid: d32f828c0a6d9364aad17298937c14c1, type: 2}
-  - {fileID: 11400000, guid: fa66ecdf9c88e9344be50febbce5fa4b, type: 2}
-  - {fileID: 11400000, guid: ddb285ac977efc440a1e9dfaf72edffe, type: 2}
-  - {fileID: 11400000, guid: cb416bf1d0a19234389fb6d0e32981b5, type: 2}
-  - {fileID: 11400000, guid: a7015db65dd3291489114a002e6ef01f, type: 2}
-  - {fileID: 11400000, guid: 0c149d2f1264ac042bf8a6d455a44f29, type: 2}
-  - {fileID: 11400000, guid: 78c0eff96301d7f428492734c7378d4e, type: 2}
-  - {fileID: 11400000, guid: f0d3f2c56d1675045a946170479710ca, type: 2}
-  - {fileID: 11400000, guid: 28235a5cc0c4df44083e2fa939aba847, type: 2}
-  - {fileID: 11400000, guid: 79622995430d29d408af352f012d740f, type: 2}
 --- !u!4 &518313789
 Transform:
   m_ObjectHideFlags: 0
@@ -931,37 +910,6 @@ MonoBehaviour:
   allCardsContent: {fileID: 26372886}
   deckImagePrefab: {fileID: 3469650127363816170, guid: b6e4078ea3be81f429485e42f1557106, type: 3}
   allDecksContent: {fileID: 1669768158}
-  debugDeckSaveData1:
-    deckName: Moon Knight
-    avatar: BlackPanther_14_avatar
-    cardBack: Atlantis_01_CardBack
-    cardIDs:
-    - arnim_zola
-    - death
-    - death
-    - death
-    - arnim_zola
-    - arnim_zola
-  debugDeckSaveData2:
-    deckName: Knull
-    avatar: Deadpool_18_avatar
-    cardBack: DeathSkull_01_CardBack
-    cardIDs:
-    - spider_man
-    - spider_ham
-    - magik
-    - iron_man
-    - venom
-    - scarlet_witch
-  debugDeckSaveData3:
-    deckName: Spiderman
-    avatar: GhostSpider_10_avatar
-    cardBack: MilesMorales_01_CardBack
-    cardIDs:
-    - spider_woman
-    - star_lord
-    - wolverine
-    - death
 --- !u!4 &640951969
 Transform:
   m_ObjectHideFlags: 0

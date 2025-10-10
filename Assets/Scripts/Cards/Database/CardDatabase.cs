@@ -10,8 +10,6 @@ public class CardDatabase : MonoBehaviour
 
     public List<CardSO> AllCardsSOList { get; private set; }
 
-    private Dictionary<string, CardSO> cardDictionary;
-
     private void Awake()
     {
         if (Instance == null)
@@ -25,19 +23,11 @@ public class CardDatabase : MonoBehaviour
         }
 
         SetAllCards();
-
-        if (cardDictionary == null)
-            cardDictionary = AllCardsSOList.ToDictionary(c => c.ID, c => c);
     }
 
-    public CardSO GetCardSOByID(string id)
+    public CardSO GetCardSOByName(string name)
     {
-        if (cardDictionary.TryGetValue(id, out CardSO card))
-        {
-            return card;
-        }
-        Debug.LogWarning($"Card with ID {id} not found in the database.");
-        return null;
+        return Resources.Load<CardSO>($"{CARD_SO_PATH}/{name}");
     }
 
     private void SetAllCards()

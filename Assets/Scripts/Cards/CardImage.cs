@@ -5,7 +5,7 @@ public class CardImage : MonoBehaviour
 {
     [SerializeField] private Sprite placeholderCardImage;
 
-    private CardSO cardSO;
+    [SerializeField] private CardSO cardSO;
     private Image cardImage;
 
     private void Awake()
@@ -36,7 +36,7 @@ public class CardImage : MonoBehaviour
         if (card != null)
         {
             cardSO = card;
-            cardImage.sprite = cardSO.GetSprite();
+            SetCardImage(card.GetSprite());
         }
         else
         {

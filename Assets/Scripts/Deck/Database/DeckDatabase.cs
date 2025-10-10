@@ -40,7 +40,7 @@ public class DeckDatabase : MonoBehaviour
 
         foreach (string id in save.cardIDs)
         {
-            CardSO data = CardDatabase.Instance.GetCardSOByID(id);
+            CardSO data = CardDatabase.Instance.GetCardSOByName(id);
             if (data != null)
                 deck.cards.Add(data);
         }
@@ -57,7 +57,7 @@ public class DeckDatabase : MonoBehaviour
         save.cardBack = deck.cardBack.name;
 
         foreach (CardSO card in deck.cards)
-            save.cardIDs.Add(card.ID);
+            save.cardIDs.Add(card.name);
         return save;
     }
 

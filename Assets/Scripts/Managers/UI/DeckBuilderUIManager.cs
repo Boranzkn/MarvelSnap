@@ -66,12 +66,20 @@ public class DeckBuilderUIManager : MonoBehaviour
 
     private void LoadSelectedDeckData(DeckImage deckImage)
     {
+        //  Create card images for each card in the deck
         foreach (var id in deckImage.GetCardIDs())
         {
-            CardSO cardSO = CardDatabase.Instance.GetCardSOByID(id);
-            Image createdCard = Instantiate(cardImagePrefab, selectedDeckUI.transform);
+            CardSO cardSO = CardDatabase.Instance.GetCardSOByName(id);
+            CardImage createdCard = Instantiate(cardImagePrefab, selectedDeckUI.transform).GetComponent<CardImage>();
 
-            createdCard.sprite = cardSO.GetSprite();
+            createdCard.SetCardSO(cardSO);
+        }
+
+        //  Fill remaining slots with empty cards if less than 12 cards
+        for (int i = deckImage.GetCardIDs().Count; i < 12; i++)
+        {
+            CardImage emptyCard = Instantiate(cardImagePrefab, selectedDeckUI.transform).GetComponent<CardImage>();
+            emptyCard.ClearCard();
         }
     }
 

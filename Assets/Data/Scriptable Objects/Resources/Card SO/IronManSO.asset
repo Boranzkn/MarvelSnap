@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Iron Man
   description: Your total Power is doubled here.
+  abilityType: 3
   cost: 5
   power: 0
-  abilityType: 3
-  sprite: {fileID: 21300000, guid: 6e0dd2aee8e7e5b42b70af5b582177b6, type: 3}
+  sprite: {fileID: 3753304395476665142, guid: 6e0dd2aee8e7e5b42b70af5b582177b6, type: 3}

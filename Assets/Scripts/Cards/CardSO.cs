@@ -4,15 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Card")]
 public class CardSO : ScriptableObject
 {
-    public string ID
-    {
-        get
-        { return cardName.Replace(" ", "_").Replace("-", "_").ToLower(); }
-        private set
-        { cardName.Replace(" ", "_").Replace("-", "_").ToLower(); }
-    }
-
-
     [SerializeField] private string cardName;
     [SerializeField] private string description;
     [SerializeField] private CardAbilityType abilityType;
