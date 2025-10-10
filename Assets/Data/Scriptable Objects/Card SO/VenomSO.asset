@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b54162aec4be84e8dbddc6e322a973, type: 3}
+  m_Name: VenomSO
+  m_EditorClassIdentifier: 
+  cardName: Venom
+  description: Destroy your other cards here. Add their Power to this card.
+  cost: 3
+  power: 3
+  abilityType: 2
+  sprite: {fileID: -7590832542369293719, guid: bbe048ee72c47b145a67629f18794ada, type: 3}

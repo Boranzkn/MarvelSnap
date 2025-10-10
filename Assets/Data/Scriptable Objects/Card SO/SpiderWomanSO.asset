@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b54162aec4be84e8dbddc6e322a973, type: 3}
+  m_Name: SpiderWomanSO
+  m_EditorClassIdentifier: 
+  cardName: Spider-Woman
+  description: Afflict all enemy cards here with -1 Power.
+  cost: 5
+  power: 8
+  abilityType: 2
+  sprite: {fileID: -2274141496828467602, guid: 0a97d560e13b0624ca85bd2633eb1e5b, type: 3}

@@ -5,8 +5,9 @@ public class CardPlacer : MonoBehaviour
 {
     [SerializeField] private List<Transform> positionList;
 
+    public List<Card> cardsInPlacer = new List<Card>();
+
     private Card card = null;
-    private List<Card> cardsInPlacer = new List<Card>();
 
     private void Start()
     {
@@ -26,7 +27,7 @@ public class CardPlacer : MonoBehaviour
 
     private bool AttemptToPlaceCard(Card card)
     {
-        if (cardsInPlacer.Count > 3) return false;
+        if (cardsInPlacer.Count >= positionList.Count) return false;
 
         card.transform.position = positionList[cardsInPlacer.Count].transform.position;
         cardsInPlacer.Add(card);

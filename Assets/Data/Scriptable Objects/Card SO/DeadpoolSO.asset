@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b54162aec4be84e8dbddc6e322a973, type: 3}
+  m_Name: DeadpoolSO
+  m_EditorClassIdentifier: 
+  cardName: Deadpool
+  description: When this is destroyed, return it to your hand with double the Power.
+  cost: 1
+  power: 1
+  abilityType: 1
+  sprite: {fileID: -8504126822323827358, guid: f9637aca50dfeb14c8ddb4ae6739649e, type: 3}

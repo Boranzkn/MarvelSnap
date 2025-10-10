@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b54162aec4be84e8dbddc6e322a973, type: 3}
+  m_Name: ShangChiSO
+  m_EditorClassIdentifier: 
+  cardName: Shang-Chi
+  description: Destroy an enemy card here that has 10 or more Power.
+  cost: 4
+  power: 3
+  abilityType: 2
+  sprite: {fileID: 5063543099923598890, guid: 2b57215ee786bf8479f48b27142446c9, type: 3}

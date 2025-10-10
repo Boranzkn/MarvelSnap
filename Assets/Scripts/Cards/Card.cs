@@ -7,9 +7,13 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 {
     public static event EventHandler OnDragEnded;
 
+    [HideInInspector] public CardPositionState CardPositionState = CardPositionState.Deck;
+
+    [SerializeField] private CardSO cardSO;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("");
+
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -19,8 +23,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("");
-
         OnDragEnded?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void PerformAbility()
+    {
+
     }
 }
