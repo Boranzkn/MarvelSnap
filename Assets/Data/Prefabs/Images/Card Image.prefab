@@ -60,6 +60,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeholderCardImage: {fileID: -8774492799936369021, guid: d252c15077dea4441968d57a22c53c33, type: 3}
+  cardDescriptionBackground: {fileID: 2054892858102470783, guid: 9c5ab4892c57783488d11881e77515d8, type: 3}
+  cardDescriptionText: {fileID: 0}
+  cardSO: {fileID: 0}
 --- !u!114 &3070703003780551622
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -903,6 +903,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98577fb980408a244a3b08039729b0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardDescription: {fileID: -8498399922933544401, guid: 9c5ab4892c57783488d11881e77515d8, type: 3}
+  canvas: {fileID: 531635845}
   createDeckUI: {fileID: 2075879186}
   allDecksUI: {fileID: 1753383666}
   selectedDeckUI: {fileID: 1722200215}

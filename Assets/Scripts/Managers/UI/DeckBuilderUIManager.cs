@@ -6,18 +6,23 @@ public class DeckBuilderUIManager : MonoBehaviour
 {
     public static DeckBuilderUIManager Instance { get; private set; }
 
-    //  UI
+    public CardDescription CardDescription;
+
+    [Header("UI Panels")]
+    [SerializeField] private Transform canvas;
     [SerializeField] private GameObject createDeckUI;
     [SerializeField] private GameObject allDecksUI;
     [SerializeField] private GameObject selectedDeckUI;
 
-    //  LOAD ALL CARDS UI
+    [Header("Card Prefab and Content Holder")]
     [SerializeField] private Image cardImagePrefab;
     [SerializeField] private Transform allCardsContent;
 
-    //  LOAD ALL DECKS UI
+    [Header("Deck Prefab and Content Holder")]
     [SerializeField] private GameObject deckImagePrefab;
     [SerializeField] private Transform allDecksContent;
+
+    private DeckImage selectedDeck;
 
     private void Awake()
     {
@@ -30,6 +35,11 @@ public class DeckBuilderUIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        CardDescription = Instantiate(CardDescription, canvas);
     }
 
     public void ShowCreateDeckUI()
@@ -61,13 +71,15 @@ public class DeckBuilderUIManager : MonoBehaviour
 
         selectedDeckUI.SetActive(true);
 
-        LoadSelectedDeckData(deckImage);
+        selectedDeck = deckImage;
+
+        LoadSelectedDeckData();
     }
 
-    private void LoadSelectedDeckData(DeckImage deckImage)
+    private void LoadSelectedDeckData()
     {
         //  Create card images for each card in the deck
-        foreach (var id in deckImage.GetCardIDs())
+        foreach (var id in selectedDeck.GetCardIDs())
         {
             CardSO cardSO = CardDatabase.Instance.GetCardSOByName(id);
             CardImage createdCard = Instantiate(cardImagePrefab, selectedDeckUI.transform).GetComponent<CardImage>();
@@ -76,7 +88,7 @@ public class DeckBuilderUIManager : MonoBehaviour
         }
 
         //  Fill remaining slots with empty cards if less than 12 cards
-        for (int i = deckImage.GetCardIDs().Count; i < 12; i++)
+        for (int i = selectedDeck.GetCardIDs().Count; i < 12; i++)
         {
             CardImage emptyCard = Instantiate(cardImagePrefab, selectedDeckUI.transform).GetComponent<CardImage>();
             emptyCard.ClearCard();
@@ -87,9 +99,9 @@ public class DeckBuilderUIManager : MonoBehaviour
     {
         foreach (var cardSO in CardDatabase.Instance.AllCardsSOList)
         {
-            Image createdCard = Instantiate(cardImagePrefab, allCardsContent);
+            CardImage createdCard = Instantiate(cardImagePrefab, allCardsContent).GetComponent<CardImage>();
 
-            createdCard.sprite = cardSO.GetSprite();
+            createdCard.SetCardSO(cardSO);
         }
     }
 
