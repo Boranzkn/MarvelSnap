@@ -79,7 +79,7 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutBack);
 
-        if (cardSO != null)
+        if (cardSO != null && eventData.selectedObject.CompareTag(DeckBuilderUIManager.TAG_SHOW_DESCRIPTION))
         {
             DeckBuilderUIManager.Instance.CardDescription.EditCardDescriptionText(cardSO.GetDescriptionWithAbility());
             DeckBuilderUIManager.Instance.CardDescription.SetTransform(rectTransform);

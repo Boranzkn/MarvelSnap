@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class DeckBuilderUIManager : MonoBehaviour
 {
     public static DeckBuilderUIManager Instance { get; private set; }
+    
+    public const string TAG_SHOW_DESCRIPTION = "ShowDescription";
 
     public CardDescription CardDescription;
 
@@ -100,6 +102,7 @@ public class DeckBuilderUIManager : MonoBehaviour
         foreach (var cardSO in CardDatabase.Instance.AllCardsSOList)
         {
             CardImage createdCard = Instantiate(cardImagePrefab, allCardsContent).GetComponent<CardImage>();
+            createdCard.gameObject.tag = TAG_SHOW_DESCRIPTION;
 
             createdCard.SetCardSO(cardSO);
         }
