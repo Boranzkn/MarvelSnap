@@ -1,23 +1,44 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class CardDescription : MonoBehaviour
 {
+    public static CardDescription Instance { get; private set; }
+
+    public const string TAG_SHOW_DESCRIPTION = "ShowDescription";
+
     [SerializeField] private TextMeshProUGUI cardDescriptionText;
 
-    public void EditCardDescriptionText(string text)
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void DoAllOnSelectAnimations(string text, RectTransform rectTransform)
     {
         cardDescriptionText.text = text;
+        SetTransform(rectTransform);
+        gameObject.SetActive(true);
+        transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutBack);
     }
 
-    public void ShowCardDescription(bool isActive)
+    public void DoAllOnDeselectAnimations()
     {
-        gameObject.SetActive(isActive);
+        transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
+        gameObject.SetActive(false);
     }
 
-    public void SetTransform(RectTransform cardRect, float verticalOffset = 0f)
+    private void SetTransform(RectTransform cardRect, float verticalOffset = 0f)
     {
         Canvas.ForceUpdateCanvases();
 
@@ -53,10 +74,5 @@ public class CardDescription : MonoBehaviour
 
         // Set final anchored position
         descRect.anchoredPosition = cardLocalPos + new Vector2(0, finalOffsetY);
-    }
-
-    public void DOScaleCostume(float scale, float duration)
-    {
-        transform.DOScale(scale, duration).SetEase(Ease.OutBack);
     }
 }

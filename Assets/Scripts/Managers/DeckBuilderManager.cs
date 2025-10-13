@@ -19,7 +19,6 @@ public class DeckBuilderManager : MonoBehaviour
 
     private void Start()
     {
-        DeckBuilderUIManager.Instance.LoadAllCards();
-        DeckBuilderUIManager.Instance.LoadAllDecks();
+        DeckBuilderUIManager.Instance.LoadStarterDeckBuilderData();
     }
 }

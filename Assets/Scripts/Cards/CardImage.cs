@@ -79,19 +79,15 @@ public class CardImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutBack);
 
-        if (cardSO != null && eventData.selectedObject.CompareTag(DeckBuilderUIManager.TAG_SHOW_DESCRIPTION))
+        if (cardSO != null && eventData.selectedObject.CompareTag(CardDescription.TAG_SHOW_DESCRIPTION))
         {
-            DeckBuilderUIManager.Instance.CardDescription.EditCardDescriptionText(cardSO.GetDescriptionWithAbility());
-            DeckBuilderUIManager.Instance.CardDescription.SetTransform(rectTransform);
-            DeckBuilderUIManager.Instance.CardDescription.ShowCardDescription(true);
-            DeckBuilderUIManager.Instance.CardDescription.DOScaleCostume(1.1f, 0.2f);
+            CardDescription.Instance.DoAllOnSelectAnimations(cardSO.GetDescriptionWithAbility(), rectTransform);
         }
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
         transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
-        DeckBuilderUIManager.Instance.CardDescription.DOScaleCostume(1f, 0.2f);
-        DeckBuilderUIManager.Instance.CardDescription.ShowCardDescription(false);
+        CardDescription.Instance.DoAllOnDeselectAnimations();
     }
 }

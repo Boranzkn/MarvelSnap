@@ -1,28 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DeckBuilderUIManager : MonoBehaviour
 {
     public static DeckBuilderUIManager Instance { get; private set; }
-    
-    public const string TAG_SHOW_DESCRIPTION = "ShowDescription";
-
-    public CardDescription CardDescription;
 
     [Header("UI Panels")]
     [SerializeField] private Transform canvas;
     [SerializeField] private GameObject createDeckUI;
-    [SerializeField] private GameObject allDecksUI;
+    [SerializeField] private AllCardsUI allCardsUI;
+    [SerializeField] private AllDecksUI allDecksUI;
     [SerializeField] private GameObject selectedDeckUI;
-
-    [Header("Card Prefab and Content Holder")]
-    [SerializeField] private Image cardImagePrefab;
-    [SerializeField] private Transform allCardsContent;
-
-    [Header("Deck Prefab and Content Holder")]
-    [SerializeField] private GameObject deckImagePrefab;
-    [SerializeField] private Transform allDecksContent;
 
     private DeckImage selectedDeck;
 
@@ -39,14 +27,15 @@ public class DeckBuilderUIManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void LoadStarterDeckBuilderData()
     {
-        CardDescription = Instantiate(CardDescription, canvas);
+        allCardsUI.LoadAllCards();
+        allDecksUI.LoadAllDecks();
     }
 
     public void ShowCreateDeckUI()
     {
-        allDecksUI.SetActive(false);
+        allDecksUI.gameObject.SetActive(false);
         selectedDeckUI.SetActive(false);
 
         createDeckUI.SetActive(true);
@@ -60,7 +49,7 @@ public class DeckBuilderUIManager : MonoBehaviour
 
         for (int i = 0; i < cardImages.Capacity; i++)
         {
-            CardImage cardImage = Instantiate(cardImagePrefab, createDeckUI.transform).GetComponent<CardImage>();
+            CardImage cardImage = Instantiate(Prefabs.GetCardImagePrefab(), createDeckUI.transform).GetComponent<CardImage>();
             cardImage.ClearCard();
             cardImages.Add(cardImage);
         }
@@ -68,7 +57,7 @@ public class DeckBuilderUIManager : MonoBehaviour
 
     public void ShowSelectedDeckUI(DeckImage deckImage)
     {
-        allDecksUI.SetActive(false);
+        allDecksUI.gameObject.SetActive(false);
         createDeckUI.SetActive(false);
 
         selectedDeckUI.SetActive(true);
@@ -84,7 +73,7 @@ public class DeckBuilderUIManager : MonoBehaviour
         foreach (var id in selectedDeck.GetCardIDs())
         {
             CardSO cardSO = CardDatabase.Instance.GetCardSOByName(id);
-            CardImage createdCard = Instantiate(cardImagePrefab, selectedDeckUI.transform).GetComponent<CardImage>();
+            CardImage createdCard = Instantiate(Prefabs.GetCardImagePrefab(), selectedDeckUI.transform).GetComponent<CardImage>();
 
             createdCard.SetCardSO(cardSO);
         }
@@ -92,33 +81,8 @@ public class DeckBuilderUIManager : MonoBehaviour
         //  Fill remaining slots with empty cards if less than 12 cards
         for (int i = selectedDeck.GetCardIDs().Count; i < 12; i++)
         {
-            CardImage emptyCard = Instantiate(cardImagePrefab, selectedDeckUI.transform).GetComponent<CardImage>();
+            CardImage emptyCard = Instantiate(Prefabs.GetCardImagePrefab(), selectedDeckUI.transform).GetComponent<CardImage>();
             emptyCard.ClearCard();
         }
-    }
-
-    public void LoadAllCards()
-    {
-        foreach (var cardSO in CardDatabase.Instance.AllCardsSOList)
-        {
-            CardImage createdCard = Instantiate(cardImagePrefab, allCardsContent).GetComponent<CardImage>();
-            createdCard.gameObject.tag = TAG_SHOW_DESCRIPTION;
-
-            createdCard.SetCardSO(cardSO);
-        }
-    }
-
-    public void LoadAllDecks()
-    {
-        foreach (var deckSaveData in DeckDatabase.Instance.DeckSaveDatas)
-        {
-            CreateDeckImage(deckSaveData);
-        }
-    }
-
-    private void CreateDeckImage(DeckSaveData saveData)
-    {
-        DeckImage deckImage = Instantiate(deckImagePrefab, allDecksContent).GetComponent<DeckImage>();
-        deckImage.Initialize(saveData);
     }
 }
