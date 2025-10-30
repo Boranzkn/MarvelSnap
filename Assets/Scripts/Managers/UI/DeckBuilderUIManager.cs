@@ -85,4 +85,9 @@ public class DeckBuilderUIManager : MonoBehaviour
             emptyCard.ClearCard();
         }
     }
+
+    public AllCardsUI GetAllCardsUI()
+    {
+        return allCardsUI;
+    }
 }
