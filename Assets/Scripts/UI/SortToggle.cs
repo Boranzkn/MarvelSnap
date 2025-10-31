@@ -15,6 +15,6 @@ public class SortToggle : MonoBehaviour
             arrow.localRotation = Quaternion.Euler(0, 0, 180); // Pointing up
         }
 
-        DeckBuilderUIManager.Instance.GetAllCardsUI().SortByDesiredValues();
+        DeckBuilderUIManager.Instance.GetAllCardsUI().SortAndDisplayCards();
     }
 }
