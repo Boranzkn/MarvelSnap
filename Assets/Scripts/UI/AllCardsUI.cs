@@ -10,7 +10,7 @@ public class AllCardsUI : MonoBehaviour
     [SerializeField] private TMP_Dropdown sortDropdown;
     [SerializeField] private Toggle sortToggle;
 
-    private List<CardImage> CardImageList = new List<CardImage>();
+    private List<CardImage> cardImageList = new List<CardImage>();
 
     public void LoadAllCards()
     {
@@ -21,20 +21,35 @@ public class AllCardsUI : MonoBehaviour
 
             createdCard.SetCardSO(cardSO);
 
-            CardImageList.Add(createdCard);
+            cardImageList.Add(createdCard);
         }
 
         SortAndDisplayCards();
     }
 
-    // SORTS THE CARDS BASED ON THE SELECTED CRITERIA IN THE DROPDOWN AND TOGGLE
     public void SortAndDisplayCards()
     {
-        CardImageSorter.SortCards(CardImageList, (SortType)sortDropdown.value, sortToggle.isOn);
+        CardImageSorter.SortCards(cardImageList, (SortType)sortDropdown.value, sortToggle.isOn);
+        ChangePositionOfCards();
+    }
 
-        for (int i = 0; i < CardImageList.Count; i++)
+    private void ChangePositionOfCards()
+    {
+        for (int i = 0; i < cardImageList.Count; i++)
         {
-            CardImageList[i].transform.SetSiblingIndex(i);
+            cardImageList[i].transform.SetSiblingIndex(i);
+        }
+    }
+
+    public void ApplySearch(string searchText)
+    {
+        // Filter cards using the CardSearch helper class
+        var filteredCards = SearchBar.ApplySearchFilter(cardImageList, searchText);
+
+        // Show only the filtered cards
+        foreach (var card in cardImageList)
+        {
+            card.gameObject.SetActive(filteredCards.Contains(card));
         }
     }
 }
