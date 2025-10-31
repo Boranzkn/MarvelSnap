@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-public enum SortType { Cost, Power, Name }
-
 public static class CardImageSorter
 {
     public static void SortCards(List<CardImage> cards, SortType sortType, bool ascending)

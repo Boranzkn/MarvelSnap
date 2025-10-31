@@ -14,3 +14,10 @@ public enum CardAbilityType
     Activate,
     EndOfTurn
 }
+
+public enum SortType
+{
+    Cost,
+    Power,
+    Name
+}

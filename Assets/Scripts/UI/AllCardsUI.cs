@@ -7,6 +7,7 @@ public class AllCardsUI : MonoBehaviour
 {
     [SerializeField] private Transform allCardsContent;
     [SerializeField] private TMP_Dropdown sortDropdown;
+    [SerializeField] private TMP_Dropdown abilityDropdown;
     [SerializeField] private TMP_InputField searchInputField;
     [SerializeField] private Toggle sortToggle;
 
@@ -27,6 +28,12 @@ public class AllCardsUI : MonoBehaviour
         SortAndDisplayCards();
     }
 
+    public void ApplyFilters()
+    {
+        ApplySearch();
+        FilterByAbility();
+    }
+
     public void SortAndDisplayCards()
     {
         CardImageSorter.SortCards(cardImageList, (SortType)sortDropdown.value, sortToggle.isOn);
@@ -41,12 +48,10 @@ public class AllCardsUI : MonoBehaviour
         }
     }
 
-    public void ApplySearch(string searchText)
+    public void ApplySearch()
     {
-        // Filter cards using the CardSearch helper class
-        var filteredCards = SearchBar.ApplySearchFilter(cardImageList, searchText);
+        var filteredCards = SearchBar.ApplySearchFilter(cardImageList, searchInputField.text);
 
-        // Show only the filtered cards
         foreach (var card in cardImageList)
         {
             card.gameObject.SetActive(filteredCards.Contains(card));
@@ -55,8 +60,18 @@ public class AllCardsUI : MonoBehaviour
 
     public void ResetSearch()
     {
-        ApplySearch(null);
-
         searchInputField.text = string.Empty;
+
+        ApplyFilters();
+    }
+
+    private void FilterByAbility()
+    {
+        var filteredCards = AbilityDropdown.FilterByAbility(cardImageList, abilityDropdown.value);
+
+        foreach (var card in cardImageList)
+        {
+            card.gameObject.SetActive(filteredCards.Contains(card));
+        }
     }
 }
