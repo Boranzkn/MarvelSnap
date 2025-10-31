@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,6 +7,7 @@ public class AllCardsUI : MonoBehaviour
 {
     [SerializeField] private Transform allCardsContent;
     [SerializeField] private TMP_Dropdown sortDropdown;
+    [SerializeField] private TMP_InputField searchInputField;
     [SerializeField] private Toggle sortToggle;
 
     private List<CardImage> cardImageList = new List<CardImage>();
@@ -51,5 +51,12 @@ public class AllCardsUI : MonoBehaviour
         {
             card.gameObject.SetActive(filteredCards.Contains(card));
         }
+    }
+
+    public void ResetSearch()
+    {
+        ApplySearch(null);
+
+        searchInputField.text = string.Empty;
     }
 }
