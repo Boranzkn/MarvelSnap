@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.Rendering.GPUSort;
 
 public class AbilityDropdown : MonoBehaviour
 {
@@ -32,26 +31,5 @@ public class AbilityDropdown : MonoBehaviour
     {
         abilityDropdown.value = -1;
         abilityDropdown.RefreshShownValue();
-    }
-
-    public static List<CardImage> FilterByAbility(List<CardImage> cardImages, int abilityIndex)
-    {
-        if (abilityIndex < 0)
-        {
-            return cardImages.FindAll(card => card.gameObject.activeInHierarchy);
-        }
-
-        CardAbilityType selectedAbility = (CardAbilityType)abilityIndex;
-
-        var filteredCards = new List<CardImage>();
-
-        foreach (var cardImage in cardImages)
-        {
-            if (cardImage.gameObject.activeInHierarchy && cardImage.GetCardSO().GetAbilityType() == selectedAbility)
-            {
-                filteredCards.Add(cardImage);
-            }
-        }
-        return filteredCards;
     }
 }

@@ -10,6 +10,7 @@ public class AllCardsUI : MonoBehaviour
     [SerializeField] private TMP_Dropdown abilityDropdown;
     [SerializeField] private TMP_InputField searchInputField;
     [SerializeField] private Toggle sortToggle;
+    [SerializeField] private CostToggles costToggles;
 
     private List<CardImage> cardImageList = new List<CardImage>();
 
@@ -30,8 +31,14 @@ public class AllCardsUI : MonoBehaviour
 
     public void ApplyFilters()
     {
-        ApplySearch();
-        FilterByAbility();
+        var filteredCards = cardImageList.FindAll(card => (string.IsNullOrEmpty(searchInputField.text) || card.GetCardSO().GetCardName().ToLower().Contains(searchInputField.text.ToLower()))
+                                                        && (abilityDropdown.value == -1 || card.GetCardSO().GetAbilityType() == (CardAbilityType)abilityDropdown.value)
+                                                        && (costToggles.GetSelectedCostTogglesIndex().Count == 0 || costToggles.GetSelectedCostTogglesIndex().Contains(card.GetCardSO().GetCost())));
+
+        foreach (var card in cardImageList)
+        {
+            card.gameObject.SetActive(filteredCards.Contains(card));
+        }
     }
 
     public void SortAndDisplayCards()
@@ -48,30 +55,10 @@ public class AllCardsUI : MonoBehaviour
         }
     }
 
-    public void ApplySearch()
-    {
-        var filteredCards = SearchBar.ApplySearchFilter(cardImageList, searchInputField.text);
-
-        foreach (var card in cardImageList)
-        {
-            card.gameObject.SetActive(filteredCards.Contains(card));
-        }
-    }
-
     public void ResetSearch()
     {
         searchInputField.text = string.Empty;
 
         ApplyFilters();
-    }
-
-    private void FilterByAbility()
-    {
-        var filteredCards = AbilityDropdown.FilterByAbility(cardImageList, abilityDropdown.value);
-
-        foreach (var card in cardImageList)
-        {
-            card.gameObject.SetActive(filteredCards.Contains(card));
-        }
     }
 }
