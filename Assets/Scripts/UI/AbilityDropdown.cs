@@ -27,7 +27,7 @@ public class AbilityDropdown : MonoBehaviour
         abilityDropdown.AddOptions(options);
     }
 
-    public void ClearDropbox()
+    public void ClearDropdown()
     {
         abilityDropdown.value = -1;
         abilityDropdown.RefreshShownValue();

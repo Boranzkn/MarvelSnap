@@ -52,4 +52,14 @@ public class CostToggles : MonoBehaviour
 
         return selectedCosts;
     }
+
+    public void ResetToggles()
+    {
+        costToggle01.isOn = false;
+        costToggle2.isOn = false;
+        costToggle3.isOn = false;
+        costToggle4.isOn = false;
+        costToggle5.isOn = false;
+        costToggle6.isOn = false;
+    }
 }

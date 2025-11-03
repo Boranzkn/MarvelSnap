@@ -61,4 +61,11 @@ public class AllCardsUI : MonoBehaviour
 
         ApplyFilters();
     }
+
+    public void ResetAllFilters()
+    {
+        ResetSearch();
+        abilityDropdown.GetComponent<AbilityDropdown>().ClearDropdown();
+        costToggles.ResetToggles();
+    }
 }
