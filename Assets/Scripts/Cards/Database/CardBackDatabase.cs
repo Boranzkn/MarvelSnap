@@ -35,4 +35,14 @@ public class CardBackDatabase : MonoBehaviour
     {
         return Resources.Load<Sprite>($"{CARD_BACKS_PATH}/{name}");
     }
+
+    public Sprite GetRandomCardBack()
+    {
+        if (CardBacks == null || CardBacks.Length == 0)
+            return null;
+
+        int randomIndex = Random.Range(0, CardBacks.Length);
+
+        return CardBacks[randomIndex];
+    }
 }

@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.Overlays;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class DeckDatabase : MonoBehaviour
 {
@@ -61,7 +59,7 @@ public class DeckDatabase : MonoBehaviour
         return save;
     }
 
-    private void SaveDeck(Deck deck)
+    public void SaveDeck(Deck deck)
     {
         DeckSaveData saveData = FromDeckToSaveData(deck);
         string key = $"{DECK_KEY_PREFIX}_{saveData.deckName}";
@@ -71,7 +69,7 @@ public class DeckDatabase : MonoBehaviour
         SaveKey(key);
     }
 
-    private void SaveDeck(DeckSaveData deck)
+    public void SaveDeck(DeckSaveData deck)
     {
         string key = $"{DECK_KEY_PREFIX}_{deck.deckName}";
         PlayerPrefs.SetString(key, JsonUtility.ToJson(deck));

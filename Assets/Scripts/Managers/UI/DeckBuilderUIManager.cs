@@ -7,10 +7,12 @@ public class DeckBuilderUIManager : MonoBehaviour
 
     [Header("UI Panels")]
     [SerializeField] private Transform canvas;
-    [SerializeField] private GameObject createDeckUI;
     [SerializeField] private AllCardsUI allCardsUI;
+    [SerializeField] private GameObject allCardBacksUI;
+    [SerializeField] private GameObject allAvatarsUI;
     [SerializeField] private AllDecksUI allDecksUI;
     [SerializeField] private GameObject selectedDeckUI;
+    [SerializeField] private CreateDeckUI createDeckUI;
 
     private DeckImage selectedDeck;
 
@@ -27,6 +29,17 @@ public class DeckBuilderUIManager : MonoBehaviour
         }
     }
 
+    public void GoBackToDefaultUIView()
+    {
+        allCardsUI.gameObject.SetActive(true);
+        allDecksUI.gameObject.SetActive(true);
+
+        allCardBacksUI.SetActive(false);
+        allAvatarsUI.SetActive(false);
+        selectedDeckUI.SetActive(false);
+        createDeckUI.gameObject.SetActive(false);
+    }
+
     public void LoadStarterDeckBuilderData()
     {
         allCardsUI.LoadAllCards();
@@ -38,27 +51,15 @@ public class DeckBuilderUIManager : MonoBehaviour
         allDecksUI.gameObject.SetActive(false);
         selectedDeckUI.SetActive(false);
 
-        createDeckUI.SetActive(true);
+        createDeckUI.gameObject.SetActive(true);
 
-        LoadEmptyCards();
-    }
-
-    private void LoadEmptyCards()
-    {
-        List<CardImage> cardImages = new List<CardImage>(12);
-
-        for (int i = 0; i < cardImages.Capacity; i++)
-        {
-            CardImage cardImage = Instantiate(Prefabs.GetCardImagePrefab(), createDeckUI.transform).GetComponent<CardImage>();
-            cardImage.ClearCard();
-            cardImages.Add(cardImage);
-        }
+        createDeckUI.LoadEmptyCards();
     }
 
     public void ShowSelectedDeckUI(DeckImage deckImage)
     {
         allDecksUI.gameObject.SetActive(false);
-        createDeckUI.SetActive(false);
+        createDeckUI.gameObject.SetActive(false);
 
         selectedDeckUI.SetActive(true);
 

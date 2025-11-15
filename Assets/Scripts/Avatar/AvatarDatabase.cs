@@ -36,4 +36,14 @@ public class AvatarDatabase : MonoBehaviour
     {
         return Resources.Load<Sprite>($"{AVATARS_PATH}/{name}");
     }
+
+    public Sprite GetRandomAvatar()
+    {
+        if (Avatars == null || Avatars.Length == 0)
+            return null;
+
+        int randomIndex = Random.Range(0, Avatars.Length);
+
+        return Avatars[randomIndex];
+    }
 }
